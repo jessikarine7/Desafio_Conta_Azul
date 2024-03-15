@@ -1,9 +1,14 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="homeContainer">
+    Olá, Mundo!
+  </div>
 </template>
+
+<style lang="scss" scoped>
+  .homeContainer{
+    padding: 15px;
+  }
+</style>
