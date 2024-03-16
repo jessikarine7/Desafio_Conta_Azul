@@ -10,46 +10,62 @@
 </script>
 
 <template>
-  <nav class="menuContainer">
-    <img 
-      src="@/assets/logo.svg" 
-      class="logo"
-    >
+  <header class="menuContainer">
+    <picture>
+      <source 
+        srcset="@/assets/icon-logo.png" 
+        media="(max-width: 400px)" 
+        width="25px"
+        alt="main logo mobile"
+      />
+      
+      <img 
+        src="@/assets/logo.svg" 
+        class="logo"
+        alt="main logo"
+      >
+    </picture>
 
-    <img 
-      src="@/assets/icon-logo.png"  
-      class="mobileLogo"  
-      width="20px"
-    >
-
-    <span class="menuTitle">
-      Home
-    </span>
-
-    <button class="menuButton">
-      Login
-    </button>
+    <nav class="navigation">
+      <p class="menuTitle">
+        Home
+      </p>
+  
+      <button class="menuButton">
+        Login
+      </button>
+    </nav>
 
     <img 
       src="@/assets/icon-mobile.png" 
       @click="toggleOptions" 
       class="mobileIcon"
       width="25px"
+      alt="icon options mobile"
     >
 
-    <div class="menuItems" v-if="showMenuItems">
-      <span class="item">
+    <ul 
+      class="menuItems" 
+      v-if="showMenuItems"
+    >
+      <li class="item">
         Home
-      </span>
+      </li>
 
-      <span class="item">
+      <li class="item">
         Login
-      </span>
-    </div>
-  </nav>
+      </li>
+    </ul>
+  </header>
 </template>
 
 <style lang="scss" scoped>
+  .navigation{
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+  }
   .menuContainer{
     display: flex;
     justify-content: space-between;
@@ -100,8 +116,8 @@
   .mobileIcon{
     display: none;
   }
-  .mobileLogo{
-    display: none;
+  ul{ 
+    list-style-type: none;
   }
   @media (max-width: 500px) {
     .menuTitle{
@@ -112,14 +128,6 @@
     }
     .mobileIcon{
       display:block;
-    }
-  }
-  @media (max-width: 250px) {
-    .mobileLogo{
-      display: block;
-    }
-    .logo{
-      display: none;
     }
   }
 </style>
