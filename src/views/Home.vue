@@ -1,38 +1,37 @@
 <script setup>
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
+  import { getWeather } from '@/service/index';
 
-  const items = ref(
-    [
-      { 
-        city: 'Nuuk/G', 
-        temperature: 30, 
-        moisture: '50%', 
-        pressure: '8Hect' 
-      }, 
-      { 
-        city: 'Urubici/BR', 
-        temperature: 25, 
-        moisture: '70%', 
-        pressure: '8Hect' 
-      }, 
-      { 
-        city: 'Nairobi/KE', 
-        temperature: 5, 
-        moisture: '10%', 
-        pressure: '8Hect' 
+  const citiesWeather = ref([]);
+  
+  const fetchCityWeather = async () => {
+    try {
+      const cities = ['nuuk', 'urubici', 'nairobi'];
+
+      for (const city of cities) {
+        const response = await getWeather(city);
+        citiesWeather.value.push(response);
       }
-    ]
-  );
+    } catch (error) {
+      console.error('Erro ao buscar dados:', error);
+    }
+  };
 
   const getTemperatureClass = (temperature) => {
-    if (temperature <= 5) {
+    const conversionTemp = temperature - 273
+    if (conversionTemp  <= 5 ) {
       return 'blue';
-    } else if (temperature <= 25) {
+    } else if (conversionTemp <= 25) {
       return 'orange';
     } else {
       return 'red';
     }
   };
+
+  onMounted(() => {
+    fetchCityWeather();
+  });
+
 </script>
 
 <template>
@@ -40,39 +39,40 @@
     <h1 class="title">Temperatura Atual</h1>
 
     <div class="card">
-
-      <div class="cardContainer" v-for="item in items">
+      <div 
+        class="cardContainer" 
+        v-for="city in citiesWeather"
+      >
         <div class="cityContainer">
           <p class="cardText">Cidade: </p>
-
           <p class="info">
-            {{item.city}}
+            {{ city?.name }}
           </p>
         </div>
   
         <div class="temperatureContainer">
           <p class="cardText">Temperatura: </p>
-
           <div 
-            :class="['temperatureChip', getTemperatureClass(item.temperature)]"
+            :class="
+              ['temperatureChip', 
+                getTemperatureClass(city.main.temp)
+              ]"
           >
-            {{ item.temperature }}° C
+            {{ (city.main.temp - 273).toFixed(0) }}° C
           </div>
         </div>
   
         <div class="containerInfo">
           <p class="cardText">Umidade: </p>
-
           <p  class="info">
-            {{ item.moisture }}
+            {{ city.main.humidity }}%
           </p>
         </div>
   
         <div class="containerInfo">
           <p class="cardText">Pressão: </p>
-
           <p  class="info">
-            {{ item.pressure }}
+            {{ city.main.pressure }} hPa
           </p>
         </div>
       </div>
