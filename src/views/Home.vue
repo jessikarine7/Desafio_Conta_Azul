@@ -1,23 +1,46 @@
 <script setup>
-  import { onMounted, ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import { getWeather } from '@/service/index';
+  import { cities } from '@/constants/cities';
 
   const citiesWeather = ref([]);
-  
+  const cache = JSON.parse(localStorage.getItem('cache')) || {};
+  const TEN_MINUTES_IN_MS = 600000;
+  let timeId;
+
   const fetchCityWeather = async () => {
     try {
-      const cities = ['nuuk', 'urubici', 'nairobi'];
+      const cityNames = Object.keys(cities);
 
-      for (const city of cities) {
-        const response = await getWeather(city);
-        citiesWeather.value.push(response);
+      if (cache.expire > Date.now()) {
+        citiesWeather.value = cache.cities;
+      } else {
+        const cities = [];
+        const expire = Date.now() + TEN_MINUTES_IN_MS;
+
+        for (const cityName of cityNames) {
+          const city = await getWeather(cityName);
+          cities.push(city);
+        }
+
+        citiesWeather.value = cities;
+
+        const freshCash = {
+          cities,
+          expire,
+        };
+
+        localStorage.setItem('cache', JSON.stringify(freshCash));
       }
     } catch (error) {
       console.error('Erro ao buscar dados:', error);
+    } finally {
+      timeId = setTimeout(fetchCityWeather, TEN_MINUTES_IN_MS);
     }
   };
 
   const getTemperatureClass = (temperature) => {
+    console.log(temperature);
     const conversionTemp = temperature - 273
     if (conversionTemp  <= 5 ) {
       return 'blue';
@@ -28,10 +51,8 @@
     }
   };
 
-  onMounted(() => {
-    fetchCityWeather();
-  });
-
+  onMounted(() => { fetchCityWeather();});
+  onUnmounted(() => clearTimeout(timeId));
 </script>
 
 <template>
@@ -39,7 +60,8 @@
     <h1 class="title">Temperatura Atual</h1>
 
     <div class="card">
-      <div 
+      <div
+        data-testid="city"
         class="cardContainer" 
         v-for="city in citiesWeather"
       >
