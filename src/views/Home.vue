@@ -21,7 +21,7 @@
         for (const cityName of cityNames) {
           const city = await getWeather(cityName);
           cities.push(city);
-        }
+        };
 
         citiesWeather.value = cities;
 
@@ -36,19 +36,19 @@
       console.error('Erro ao buscar dados:', error);
     } finally {
       timeId = setTimeout(fetchCityWeather, TEN_MINUTES_IN_MS);
-    }
+    };
   };
 
   const getTemperatureClass = (temperature) => {
-    console.log(temperature);
-    const conversionTemp = temperature - 273
+    const conversionTemp = temperature - 273;
+
     if (conversionTemp  <= 5 ) {
       return 'blue';
     } else if (conversionTemp <= 25) {
       return 'orange';
     } else {
       return 'red';
-    }
+    };
   };
 
   onMounted(() => { fetchCityWeather();});
@@ -103,24 +103,26 @@
 </template>
 
 <style lang="scss" scoped>
-  .card{
+  .homeContainer {
+    padding: 30px;
+    display: flex;
+    flex-direction:column;
+  }
+  .title {
+    font-size: 25px;
+    margin-top: 40px;
+    color: #191970;
+  }
+  .card {
     display: flex;
     min-width: 300px;
     width: 90%;
     gap: 15px;
     flex-wrap: wrap;
+    padding-bottom: 10px;
+    margin-top: 5px;
   }
-  .homeContainer{
-    padding: 30px;
-    display: flex;
-    flex-direction:column
-  }
-  .title{
-    font-size: 25px;
-    margin-top: 3%;
-    color: #191970;
-  }
-  .cardContainer{
+  .cardContainer {
     display: flex;
     flex-direction: column;
     min-width: 300px;
@@ -130,16 +132,16 @@
     width: 30%;
     height: 200px;
     margin-top: 25px;
-    box-shadow: 5px 5px 5px rgba(226, 226, 226, 0.445);
+    box-shadow: 10px 5px 5px rgba(226, 226, 226, 0.445);
   }
-  .temperatureContainer{
+  .temperatureContainer {
     display: flex;
     flex-direction: column;
     align-items: end;
     gap: 5px;
     margin-top: 15px;
   }
-  .temperatureChip{
+  .temperatureChip {
     text-align:center;
     width: 93px;
     border-radius: 10px;
@@ -150,18 +152,17 @@
     font-size: 16px;
   }
   .blue {
-    background-color: rgb(3, 3, 212);
+    background-color: rgb(17, 17, 233);
     color: white;
   }
   .orange {
-    background-color: rgb(240, 158, 6);
+    background-color: rgb(255, 72, 0);
     color: white;
   }
   .red {
-    background-color: rgb(218, 11, 11);
+    background-color: rgb(187, 11, 11);
     color: white;
   }
-
   .cityContainer{
     display: flex;
     justify-content: center;
@@ -187,27 +188,29 @@
     .cardContainer{
       margin-top: 5px;
     }
-    .card{
-      gap: 5px;
-    }
   }
-  @media (max-width: 400px) {
+  @media (max-width: 800px) {
     .homeContainer{
       padding: 20px;
     }
     .cardContainer{
-      min-width: 240px;
-      height: 170px;
+      min-width: 230px;
+      height: 165px;
     }
     .info{
       font-size: 16px;
     }
     .title{
       font-size: 20px;
+      margin-top: 45px;
     }
     .temperatureChip{
       padding: 5px;
       font-size: 14px;
+    }
+    .card{
+      gap: 5px;
+      padding-bottom: 5px;
     }
   }
 </style>

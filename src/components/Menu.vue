@@ -1,12 +1,10 @@
 <script setup>
   import { ref } from 'vue';
-
   const showMenuItems = ref(false);
 
   const toggleOptions = () => {
     showMenuItems.value = !showMenuItems.value;
   };
-  
 </script>
 
 <template>
@@ -14,8 +12,8 @@
     <picture>
       <source 
         srcset="@/assets/icon-logo.png" 
-        media="(max-width: 400px)" 
-        width="25px"
+        media="(max-width: 500px)" 
+        width="21px"
         alt="main logo mobile"
       />
       
@@ -35,27 +33,33 @@
         Login
       </button>
     </nav>
-
+    
     <img 
       src="@/assets/icon-mobile.png" 
       @click="toggleOptions" 
       class="mobileIcon"
       width="25px"
       alt="icon options mobile"
+      ref="menuButton"
     >
 
-    <ul 
+    <nav 
+      v-if="showMenuItems"  
+      @mouseleave="showMenuItems = false"
       class="menuItems" 
-      v-if="showMenuItems"
+      ref="menuItems"
+      @click.stop
     >
-      <li class="item">
-        Home
-      </li>
-
-      <li class="item">
-        Login
-      </li>
-    </ul>
+      <ul>
+        <li class="item">
+          Home
+        </li>
+  
+        <li class="item">
+          Login
+        </li>
+      </ul>
+    </nav>
   </header>
 </template>
 
@@ -71,6 +75,9 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    position: fixed;
+    width: 100%;
+    top: 0;
     gap: 15px;
     background-color: #191970;
     padding: 15px;
@@ -119,7 +126,7 @@
   ul{ 
     list-style-type: none;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     .menuTitle{
       display: none;
     }
