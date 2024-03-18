@@ -25,17 +25,18 @@
     </picture>
 
     <nav class="navigation">
-      <p class="menuTitle">
+      <p class="menuTitle" data-testid="menuTitle">
         Home
       </p>
   
-      <button class="menuButton">
+      <button class="menuButton" data-testid="menuButton">
         Login
       </button>
     </nav>
     
     <img 
-      src="@/assets/icon-mobile.png" 
+      src="@/assets/icon-mobile.png"
+      data-testid="menuMobile"
       @click="toggleOptions" 
       class="mobileIcon"
       width="25px"
@@ -47,6 +48,7 @@
       v-if="showMenuItems"  
       @mouseleave="showMenuItems = false"
       class="menuItems" 
+      data-testid="menuItems"
       ref="menuItems"
       @click.stop
     >
@@ -123,7 +125,7 @@
   .mobileIcon{
     display: none;
   }
-  ul{ 
+  ul { 
     list-style-type: none;
   }
   @media (max-width: 600px) {

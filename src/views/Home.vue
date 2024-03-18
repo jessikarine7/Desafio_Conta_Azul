@@ -57,11 +57,10 @@
 
 <template>
   <section class="homeContainer">
-    <h1 class="title">Temperatura Atual</h1>
+    <h1 class="title" data-testid="title">Temperatura Atual</h1>
 
-    <div class="card">
+    <div class="card" data-testid="card">
       <div
-        data-testid="city"
         class="cardContainer" 
         v-for="city in citiesWeather"
       >
