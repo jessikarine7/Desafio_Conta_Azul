@@ -25,13 +25,15 @@
     </picture>
 
     <nav class="navigation">
-      <p class="menuTitle" data-testid="menuTitle">
-        Home
-      </p>
+      <p 
+        class="menuTitle" 
+        data-testid="menuTitle"
+      >Home</p>
   
-      <button class="menuButton" data-testid="menuButton">
-        Login
-      </button>
+      <button 
+        class="menuButton" 
+        data-testid="menuButton"
+      >Login</button>
     </nav>
     
     <img 
@@ -66,13 +68,13 @@
 </template>
 
 <style lang="scss" scoped>
-  .navigation{
+  .navigation {
     display: flex;
     width: 50%;
     justify-content: space-between;
     align-items: center;
   }
-  .menuContainer{
+  .menuContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -85,14 +87,14 @@
     padding: 15px;
     z-index: 9;
   }
-  .menuTitle{
+  .menuTitle {
     color: white;
     font-size: 15px;
   }
-  .menuTitle:hover{
+  .menuTitle:hover {
     text-decoration: underline;
   }
-  .menuButton{
+  .menuButton {
     padding: 5px;
     width: 70px;
     color: #191970;
@@ -100,10 +102,10 @@
     border-radius: 5px;
     background-color: white;
   }
-  .menuButton:hover{
+  .menuButton:hover {
     background-color: rgba(235, 232, 232, 0.938);
   }
-  .menuItems{
+  .menuItems {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -115,14 +117,14 @@
     font-size: 14px;
     z-index: 999;
   }
-  .item{
+  .item {
     padding: 10px;
     border-bottom: 1px solid #ccc;
   }
-  .item:hover{
+  .item:hover {
     background-color: rgba(235, 232, 232, 0.938);
   }
-  .mobileIcon{
+  .mobileIcon {
     display: none;
   }
   ul { 

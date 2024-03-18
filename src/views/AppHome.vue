@@ -57,7 +57,10 @@
 
 <template>
   <section class="homeContainer">
-    <h1 class="title" data-testid="title">Temperatura Atual</h1>
+    <h1 
+      class="title" 
+      data-testid="title"
+    >Temperatura Atual</h1>
 
     <div class="card" data-testid="card">
       <div
@@ -163,22 +166,22 @@
     background-color: rgb(187, 11, 11);
     color: white;
   }
-  .cityContainer{
+  .cityContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
   }
-  .info{
+  .info {
     color: rgb(107, 107, 107);
     font-size: 20px;
     font-weight: 700;
   }
-  .cardText{
+  .cardText {
     color: rgb(107, 107, 107);
     font-size: 16px;
   }
-  .containerInfo{
+  .containerInfo {
     margin-top: 7px;
     display: flex;
     align-items: center;
