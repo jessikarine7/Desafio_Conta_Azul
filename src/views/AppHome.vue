@@ -21,7 +21,7 @@
         for (const cityName of cityNames) {
           const city = await getWeather(cityName);
           cities.push(city);
-        };
+        }
 
         citiesWeather.value = cities;
 
@@ -36,7 +36,7 @@
       console.error('Erro ao buscar dados:', error);
     } finally {
       timeId = setTimeout(fetchCityWeather, TEN_MINUTES_IN_MS);
-    };
+    }
   };
 
   const getTemperatureClass = (temperature) => {
@@ -48,7 +48,7 @@
       return 'orange';
     } else {
       return 'red';
-    };
+    }
   };
 
   onMounted(() => { fetchCityWeather();});
@@ -62,7 +62,8 @@
     <div class="card" data-testid="card">
       <div
         class="cardContainer" 
-        v-for="city in citiesWeather"
+        v-for="(city, index) in citiesWeather"
+        :key="index"
       >
         <div class="cityContainer">
           <p class="cardText">Cidade: </p>

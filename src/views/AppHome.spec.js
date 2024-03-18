@@ -1,17 +1,17 @@
-import { describe, expect, it, vi } from 'vitest';
-import Home from './Home.vue';
+import { describe, expect, it } from 'vitest';
+import AppHome from './AppHome.vue';
 import { mount } from '@vue/test-utils';
 
 describe('Home', () => {
   it('should mount without error', () => {
-    expect(() => mount(Home)).not.toThrowError();
+    expect(() => mount(AppHome)).not.toThrowError();
   });
   it('should have title', () => {
-    const wrapper = mount(Home)
+    const wrapper = mount(AppHome)
     expect(wrapper.findAll('[data-testid="title"]').length).toBe(1);
   });
   it('should have card', () => {
-    const wrapper = mount(Home)
+    const wrapper = mount(AppHome)
     expect(wrapper.findAll('[data-testid="card"]').length).toBe(1);
   });
 });

@@ -1,10 +1,10 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import Menu from '@/components/Menu.vue'
+import TopMenu from '@/components/TopMenu.vue'
 </script>
 
 <template>
-  <Menu />
+  <TopMenu/>
   <RouterView />
 </template>
 
